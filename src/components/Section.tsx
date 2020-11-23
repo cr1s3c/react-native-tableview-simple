@@ -16,7 +16,9 @@ import { ThemeContext } from './Theme';
 export interface SectionInterface {
   allowFontScaling?: boolean;
   children?: React.ReactNode;
+  footerAccessibilityLabel: string | null,
   footerComponent?: React.ReactNode;
+  headerAccessibilityLabel: string | null,
   headerComponent?: React.ReactNode;
   footer?: string;
   footerTextColor?: TextStyle['color'];
@@ -39,7 +41,9 @@ export interface SectionInterface {
 const Section: React.FC<SectionInterface> = ({
   allowFontScaling = true,
   children,
+  footerAccessibilityLabel = null,
   footerComponent,
+  headerAccessibilityLabel = null,
   headerComponent,
   footer,
   footerTextColor,
@@ -178,6 +182,7 @@ const Section: React.FC<SectionInterface> = ({
         <View style={styles.sectionheader}>
           <SafeAreaView>
             <Text
+              accessibilityLabel={headerAccessibilityLabel}
               allowFontScaling={allowFontScaling}
               style={localStyles.sectionheaderText}>
               {header}
@@ -190,6 +195,7 @@ const Section: React.FC<SectionInterface> = ({
       return (
         <View style={styles.sectionheader}>
           <Text
+            accessibilityLabel={headerAccessibilityLabel}
             allowFontScaling={allowFontScaling}
             style={localStyles.sectionheaderText}>
             {header}
@@ -209,6 +215,7 @@ const Section: React.FC<SectionInterface> = ({
         <View style={styles.sectionfooter}>
           <SafeAreaView>
             <Text
+              accessibilityLabel={footerAccessibilityLabel}
               allowFontScaling={allowFontScaling}
               style={localStyles.sectionfooterText}>
               {footer}
@@ -221,6 +228,7 @@ const Section: React.FC<SectionInterface> = ({
       return (
         <View style={styles.sectionfooter}>
           <Text
+            accessibilityLabel={footerAccessibilityLabel}
             allowFontScaling={allowFontScaling}
             style={localStyles.sectionfooterText}>
             {footer}

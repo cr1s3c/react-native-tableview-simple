@@ -16,6 +16,7 @@ import {
 import { ThemeContext } from './Theme';
 
 export interface CellInterface {
+  accessibilityLabel: string | null,
   accessory?:
     | false
     | 'DisclosureIndicator'
@@ -58,6 +59,7 @@ export interface CellInterface {
 }
 
 const Cell: React.FC<CellInterface> = ({
+  accessibilityLabel = null,
   accessory = false,
   accessoryColor,
   accessoryColorDisclosureIndicator,
@@ -405,6 +407,9 @@ const Cell: React.FC<CellInterface> = ({
   if (isPressable && !isDisabled) {
     return (
       <TouchableHighlight
+        accessible
+        accessibilityLabel={accessibilityLabel}
+        accessibilityRole="button"
         activeOpacity={highlightActiveOpacity}
         onPress={onPress}
         underlayColor={highlightUnderlayColor || theme.colors.body}
@@ -416,7 +421,7 @@ const Cell: React.FC<CellInterface> = ({
     );
   }
   return (
-    <View testID={testID}>
+    <View accessible accessibilityLabel={accessibilityLabel} testID={testID}>
       {withSafeAreaView ? renderCellWithSafeAreaView() : renderCell()}
     </View>
   );
